@@ -1,0 +1,51 @@
+#body {
+    background-color: rgba(0, 0, 0, 0.965);
+    height: 636px;
+}
+h1 {
+    color: gray;
+    text-align: center;
+}
+
+.card {
+    margin-right: auto;
+    margin-left: auto;
+    width: 250px;
+    box-shadow: 0 15px 25px rgba(255, 0, 0, 0.605);
+    border-radius: 30px;
+    backdrop-filter: blur(14px);
+    background-color: rgba(248, 7, 7, 0.881);
+    padding: 10px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    top: 150px;
+}
+ .btn {
+    background-color: black;
+    color: white;
+ }
+
+.configuracion {
+    background-color: black;
+}
+
+.contenido {
+    width: 250px;
+    height: 636px;
+}
+
+.navbar-brand {
+    background-color: rgb(226, 9, 9);
+    border-radius: 5px;
+    width: 105px;
+    padding-left: 7px;
+    color: rgb(255, 255, 255);
+}
+
+.contenido {
+    font-size: 50px;
+    padding-top: 150px;
+    padding-left: 1.9rem;
+    color: rgb(215, 213, 213);
+    box-shadow: 0 15px 25px rgb(255, 0, 0)
+}
