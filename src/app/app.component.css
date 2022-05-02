@@ -1,7 +1,4 @@
-#body {
-    background-color: rgba(0, 0, 0, 0.965);
-    height: 636px;
-}
+
 h1 {
     color: gray;
     text-align: center;
@@ -24,15 +21,6 @@ h1 {
     background-color: black;
     color: white;
  }
-
-.configuracion {
-    background-color: black;
-}
-
-.contenido {
-    width: 250px;
-    height: 636px;
-}
 
 .navbar-brand {
     background-color: rgb(226, 9, 9);
