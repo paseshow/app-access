@@ -23,3 +23,4 @@ describe('ScanComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

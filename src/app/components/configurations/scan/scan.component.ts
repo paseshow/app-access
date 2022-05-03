@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-scan',
   templateUrl: './scan.component.html',
@@ -10,6 +11,17 @@ export class ScanComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  onScanSuccess(result: string) {
+    console.log(result);
+  }
+
+  onScanError(result: any) {
+    console.log(result);
+  }
+
+  onScanComplete(result: any) {
+    console.log(result);
   }
 
 }

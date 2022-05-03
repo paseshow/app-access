@@ -11,5 +11,16 @@ export class ConfigurationsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  onScanSuccess(result: string) {
+    console.log(result);
+  }
+
+  onScanError(result: Error) {
+    console.log(result);
+  }
+
+  onScanResult(result: string) {
+    console.log(result);
+  }
 
 }

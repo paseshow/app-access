@@ -1,0 +1,10 @@
+<app-dashboar></app-dashboar>
+<zxing-scanner>
+  [formats]="['QR_CODE']"
+  (onScanSuccess)="scanSuccess($event)"
+  (onScanError)="scanError($event)"
+  (onScanResult)="scanResult($event)"
+>
+</zxing-scanner>
+
+

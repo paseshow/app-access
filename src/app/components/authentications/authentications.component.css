@@ -2,3 +2,57 @@
     background-color: rgba(0, 0, 0, 0.965);
     height: 100%;
 }
+
+.container {
+    padding-top: 120px;
+    padding-left: 30%;
+}
+
+.card {
+    border-radius: 20px;
+    max-width: 350px;
+    background-color: rgba(255, 252, 252, 0.972);
+}
+
+.img-paseshow{
+    width: 210px;
+    height: 70px;
+    border-radius: 20px;
+    background-color: black;
+    background-image: url(https://www.paseshow.com.ar/images/inicio/logov3.png);
+    background-size: cover;
+}
+
+.btn {
+    background-color: forestgreen;
+    color: white;
+    width: 315px;
+}
+
+
+@media only screen and (max-width: 600px) {
+#body {
+    height: 100%;
+    background-color: black;
+}
+
+.container {
+    padding-left: 5%;
+}
+
+}
+
+@media only screen and (max-width: 360px) {
+    .card {
+        width: 300px;
+    }
+
+    .btn {
+        width: 265px;
+    }
+
+    .container {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}

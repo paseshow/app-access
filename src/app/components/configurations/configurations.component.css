@@ -1,0 +1,133 @@
+.contenido {
+    width: auto;
+    height: 800px;
+    padding-top: 40px;
+    padding-left: 27%;
+    background-color: black;
+}
+
+h1 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 18%;
+}
+
+.tarjeta-conf {
+    max-width: 600px;
+    height: 500px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.badge {
+    margin-left: 20%;
+    font-size: 14px;
+    color: black;
+    background-color: white;
+}
+
+.form-select {
+    margin-left: 28%;
+    max-width: 300px;
+}
+
+.checkear {
+    max-width: 300px;
+    height: 140px;
+    background-color: rgba(255, 255, 255, 0.928);
+    margin-left: 28%;
+    padding-left: 1%;
+    border: 1px solid;
+    background-color: #ffffff;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.check{
+    width: 200px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.928);
+    margin-left: 28%;
+    padding-left: 1%;
+}
+
+.btn {
+    margin-left: 28%;
+    width: 300px;
+}
+
+@media only screen and (max-width: 830px) {
+    .contenido {
+        padding-left: 15%;
+    }
+
+    h1 {
+        padding-left: 27%;
+    }
+    
+    }
+
+@media only screen and (max-width: 602px) {
+    .contenido {
+        padding-left: 0%;
+    }
+
+    h1 {
+        color: rgb(255, 255, 255);
+        padding-left: 32%;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+@media only screen and (max-width: 570px) {
+
+    .tarjeta-conf {
+        width: 570px;
+        height: 500px;
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    h1 {
+        color: rgb(255, 255, 255);
+        padding-left: 32%;
+        font-family: 'Montserrat', sans-serif;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    h1 {
+        padding-left: 23%;
+    }
+
+    .tarjeta-conf {
+        width: 360px;
+        height: 500px;
+        border-radius: 5px;
+        background-color: white;
+    }
+    .badge {
+    margin-left: 5%;
+    color: black;
+    background-color: white;
+    }
+
+    .form-select {
+        margin-left: 5%;
+    }
+
+    .checkear {
+        margin-left: 5%;
+    }
+
+    .check {
+        margin-left: 5%;
+    }
+
+    .btn {
+        width: 360px;
+        margin-left: 0%;
+    }
+}
