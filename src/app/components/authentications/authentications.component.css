@@ -17,6 +17,7 @@
 .img-paseshow{
     width: 210px;
     height: 70px;
+    margin-left: 50px;
     border-radius: 20px;
     background-color: black;
     background-image: url(https://www.paseshow.com.ar/images/inicio/logov3.png);
@@ -53,6 +54,10 @@
 
     .container {
         margin-right: 0px;
-        margin-left: 0px;
+        margin-left: 8px;
+    }
+
+    .img-paseshow {
+        margin-left: 25px;
     }
 }
