@@ -1,10 +1,29 @@
 <app-dashboar></app-dashboar>
+<div class="container-padre">
+  <div class="contenido"></div>
 <zxing-scanner>
   [formats]="['QR_CODE']"
   (onScanSuccess)="scanSuccess($event)"
   (onScanError)="scanError($event)"
   (onScanResult)="scanResult($event)"
->
 </zxing-scanner>
+</div>
+<div class="informacion">
+  <ul>
+    <li>Ubicación:</li>
+    <li>Evento:</li>
+    <li>Descuento:</li>
+    <li>Usuario:</li>
+    <li>Funcion:</li>
+    <li>Fecha y Hora:</li>
+  </ul>
+</div>
 
+
+<!-- ub
+event
+descuento
+usuario / comprador
+funcion
+fecha y hora -->
 
