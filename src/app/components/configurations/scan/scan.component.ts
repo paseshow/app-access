@@ -8,20 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScanComponent implements OnInit {
 
+  qrCode: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
   onScanSuccess(result: string) {
+    console.log("Scan Success -----------");
     console.log(result);
+    this.qrCode = result;
   }
 
   onScanError(result: any) {
+    console.log("Scan Error -----------");
     console.log(result);
+    this.qrCode = result;
   }
 
   onScanComplete(result: any) {
+    console.log("Scan Complete -----------");
     console.log(result);
+    this.qrCode = result;
   }
 
 }
