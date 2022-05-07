@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccessControlService } from 'app/services/access-control.service';
 
 
 @Component({
@@ -9,15 +10,43 @@ import { Component, OnInit } from '@angular/core';
 export class ScanComponent implements OnInit {
 
   qrCode: string = '';
+  data = {
+    ubicacionId: '',
+    evento: '',
+    descuento: '',
+    usuario: '',
+    funcion: '',
+    fecha: ''
+  };
 
-  constructor() { }
+  constructor(
+    private accessControlService: AccessControlService
+  ) { }
 
   ngOnInit(): void {
+    //this.onScanSuccess("042A89F29D565E0E0F38E40D6CE5B86D");
   }
+
   onScanSuccess(result: string) {
     console.log("Scan Success -----------");
     console.log(result);
     this.qrCode = result;
+
+    this.accessControlService.accessByQrCode(result).subscribe(
+      (responseExit: any) => {
+        this.data = {
+          descuento: responseExit[0].descuento_sector_id.descripcion,
+          evento:  responseExit[0].sector_evento_id.evento_id.nombre,
+          fecha: 'hoy',
+          funcion: responseExit[0].sector_evento_id.descripcion,
+          ubicacionId: responseExit[0].id,
+          usuario: responseExit[0].reserva_id.cliente_id.nombre
+        }
+      }, error => {
+
+      });
+
+
   }
 
   onScanError(result: any) {
