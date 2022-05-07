@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 // enable ssl redirect
-app.use(sslRedirect.default);
+app.use(sslRedirect());
 
 // Serve only the static files form the dist directory
 app.use(express.static('./dist'));
