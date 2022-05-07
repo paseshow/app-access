@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeFormat } from '@zxing/library';
 import { AccessControlService } from 'app/services/access-control.service';
 
 
@@ -19,6 +20,16 @@ export class ScanComponent implements OnInit {
     fecha: ''
   };
 
+  torchEnabled = false;
+  tryHarder = false;
+
+  formatsEnabled: BarcodeFormat[] = [
+    BarcodeFormat.CODE_128,
+    BarcodeFormat.DATA_MATRIX,
+    BarcodeFormat.EAN_13,
+    BarcodeFormat.QR_CODE,
+  ];
+
   constructor(
     private accessControlService: AccessControlService
   ) { }
@@ -27,7 +38,7 @@ export class ScanComponent implements OnInit {
     //this.onScanSuccess("042A89F29D565E0E0F38E40D6CE5B86D");
   }
 
-  onScanSuccess(result: string) {
+  onCodeResult(result: string) {
     console.log("Scan Success -----------");
     console.log(result);
     this.qrCode = result;

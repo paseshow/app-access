@@ -1,11 +1,9 @@
 <app-dashboar></app-dashboar>
 <div class="container-padre">
   <div class="contenido"></div>
-  <zxing-scanner>
-    (onScanSuccess)="scanSuccess($event)"
-    (onScanError)="scanError($event)"
-    (onScanResult)="scanResult($event)"
-  </zxing-scanner>
+  <zxing-scanner [torch]="torchEnabled" (scanSuccess)="onCodeResult($event)"
+    [formats]="formatsEnabled" [tryHarder]="tryHarder"
+    ></zxing-scanner>
 </div>
 <div class="informacion">
   <ul>
