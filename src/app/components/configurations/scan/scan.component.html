@@ -1,9 +1,17 @@
 <app-dashboar></app-dashboar>
 <div class="container-padre">
   <div class="contenido"></div>
-  <zxing-scanner [torch]="torchEnabled" (scanSuccess)="onCodeResult($event)"
+  <!-- <zxing-scanner [torch]="torchEnabled" (scanSuccess)="onCodeResult($event)"
     [formats]="formatsEnabled" [tryHarder]="tryHarder"
-    ></zxing-scanner>
+    ></zxing-scanner> -->
+    <qr-scanner
+      #QrScannerComponent
+        [debug]="true"
+        [canvasWidth]="1080" 
+        [canvasHeight]="720" 
+        [stopAfterScan]="stopAfterScan" 
+        [updateTime]="500">
+    </qr-scanner>
 </div>
 <div class="informacion">
   <ul>
@@ -17,7 +25,7 @@
 </div>
 
 <div class="container">
-  <h3>{{qrCode}}</h3>
+  <h5>{{qrCode}}</h5>
 </div>
 
 
