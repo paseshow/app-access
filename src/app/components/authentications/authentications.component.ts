@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { text } from 'express';
 
 @Component({
   selector: 'app-authentications',
@@ -6,11 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authentications.component.css']
 })
 export class AuthenticationsComponent implements OnInit {
-
   constructor() { }
+  public myClass: boolean = false;
 
-  ngOnInit(): void {
+
+  ngOnInit() {
   }
+
+  mostrarPass(){
+    //mostrar contraseña
+      let password :any = document.getElementById('pass');
+      if (password.type === "password") {
+        password.type = "text";
+      } else {
+        password.type = "password";
+      } // mostrar ojo
+      return this.myClass = !this.myClass;
+    }
+
 
   
 
