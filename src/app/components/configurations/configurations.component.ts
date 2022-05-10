@@ -1,4 +1,6 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-configurations',
@@ -23,4 +25,16 @@ export class ConfigurationsComponent implements OnInit {
     console.log(result);
   }
 
+  checksEvento = [
+    {evento: 'DEMO1', checked: false},
+    {evento: 'DEMO2', checked: false},
+    {evento: 'DEMO3', checked: false},
+    {evento: 'DEMO4', checked: false},
+    {evento: 'DEMO5', checked: false},
+    {evento: 'DEMO6', checked: false}
+  ];
+  
+  checkOnClick(check: boolean) {
+    this.checksEvento.forEach(row => row.checked = check);
+  }
 }

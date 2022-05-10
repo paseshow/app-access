@@ -7,6 +7,8 @@ import { text } from 'express';
   styleUrls: ['./authentications.component.css']
 })
 export class AuthenticationsComponent implements OnInit {
+  masterSelected: any;
+  checklist: any;
   constructor() { }
   public myClass: boolean = false;
 
@@ -24,8 +26,4 @@ export class AuthenticationsComponent implements OnInit {
       } // mostrar ojo
       return this.myClass = !this.myClass;
     }
-
-
-  
-
 }

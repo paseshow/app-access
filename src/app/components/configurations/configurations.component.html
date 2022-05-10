@@ -12,7 +12,7 @@
             <option value="3">Three</option>
           </select><br>
           <div class="badge" style="width: 1rem;">
-            FUNCION:
+            FUNCIÓN:
           </div> 
           <select class="form-select" aria-label="Default select example">
             <option selected>Seleccione alguna opción</option>
@@ -24,39 +24,18 @@
             SECTORES
           </div>
           <div class="checkear">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Default checkbox
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                <label class="form-check-label" for="flexCheckChecked">
-                  Checked checkbox
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Default checkbox
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-                <label class="form-check-label" for="flexCheckChecked">
-                  Checked checkbox
-                </label>
-              </div>
-          </div><br>
-          <div class="check">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
-              <label class="form-check-label" for="flexCheckChecked">
-                Seleccionar Todo
-              </label>
-            </div>
-          </div><br>
-          <button type="button" class="btn btn-success">GUARDAR</button>
+            <div class="form-check" style="padding-left: 5px;" *ngFor="let check of checksEvento;">
+              <input type="checkbox" [checked]='check.checked'>
+              {{check.evento}}
+        </div>
     </div>
+    <div class="check">
+      <div class="check">
+        <input #check class="form-check-input" type="checkbox" value="option1" id="blankCheckbox" (change)='checkOnClick(check.checked)'>
+        <label class="form-check-label" for="flexCheckIndeterminate">
+          Seleccionar Todo
+        </label>
+      </div>
+    </div><br>
+    <button type="button" class="btn btn-success">GUARDAR</button>
 </div>
