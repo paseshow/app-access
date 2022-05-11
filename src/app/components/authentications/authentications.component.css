@@ -18,18 +18,38 @@
     width: 210px;
     height: 70px;
     margin-left: 50px;
-    border-radius: 20px;
+    border-radius: 5px;
     background-color: black;
     background-image: url(https://www.paseshow.com.ar/images/inicio/logov3.png);
     background-size: cover;
 }
 
+.form-password {
+    position: relative;
+}
+
+.viewPassword {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+}
+
+.boton {
+    background-color: aqua;
+}
 .btn {
     background-color: forestgreen;
     color: white;
     width: 315px;
 }
-
+.classTrue {
+    background-color: blue;
+    color: #fff;
+}
+.classFalse {
+    background-color: red;
+    color: #fff;
+}
 
 @media only screen and (max-width: 600px) {
 #body {

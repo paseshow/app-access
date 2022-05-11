@@ -1,5 +1,7 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-configurations',
@@ -7,6 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./configurations.component.css']
 })
 export class ConfigurationsComponent implements OnInit {
+
+  checksEvento = [
+    {evento: 'DEMO1', checked: false},
+    {evento: 'DEMO2', checked: false},
+    {evento: 'DEMO3', checked: false},
+    {evento: 'DEMO4', checked: false},
+    {evento: 'DEMO5', checked: false},
+    {evento: 'DEMO6', checked: false}
+  ];
+  
 
   constructor(
     private router: Router
@@ -29,4 +41,8 @@ export class ConfigurationsComponent implements OnInit {
   redirect() {
     this.router.navigate(['configurations','scan']);
   };
+
+  checkOnClick(check: boolean) {
+    this.checksEvento.forEach(row => row.checked = check);
+  }
 }

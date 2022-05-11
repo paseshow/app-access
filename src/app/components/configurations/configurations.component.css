@@ -34,10 +34,14 @@ h1 {
 .checkear {
     max-width: 300px;
     height: 140px;
+    margin-top: 5px;
     background-color: rgba(255, 255, 255, 0.928);
     margin-left: 28%;
-    padding-left: 1%;
+    padding-top: 5px;
+    padding-left: 10px;
     border: 1px solid;
+    overflow: hidden;
+    overflow-y: scroll;
     background-color: #ffffff;
 }
 
@@ -49,13 +53,20 @@ h1 {
     width: 200px;
     height: 30px;
     background-color: rgba(255, 255, 255, 0.928);
-    margin-left: 28%;
+    margin-left: 97px;
     padding-left: 1%;
+    padding-top: 7px;
 }
 
 .btn {
     margin-left: 28%;
     width: 300px;
+}
+
+.card111 {
+    width: 100px;
+    height: 250px;
+    background-color: aqua;
 }
 
 @media only screen and (max-width: 830px) {
@@ -99,17 +110,22 @@ h1 {
 
 @media only screen and (max-width: 360px) {
     h1 {
-        padding-left: 23%;
+        padding-left: 25%;
     }
 
     .tarjeta-conf {
-        width: 360px;
+        width: 300px;
         height: 500px;
+        margin-left: 9%;
         border-radius: 5px;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .form-select{
+        width: 270px;
     }
     .badge {
-    margin-left: 5%;
+    margin-left: 10%;
     color: black;
     background-color: white;
     }
@@ -119,15 +135,19 @@ h1 {
     }
 
     .checkear {
+        width: 270px;
         margin-left: 5%;
+        overflow: hidden;
+        overflow-y: scroll;
     }
 
     .check {
-        margin-left: 5%;
+        margin-left: 22px;
     }
 
     .btn {
-        width: 360px;
-        margin-left: 0%;
-    }
+        width: 270px;
+        margin-left: 5%;
+    } 
+    
 }

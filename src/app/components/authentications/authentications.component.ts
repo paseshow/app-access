@@ -10,6 +10,10 @@ import { AuthenticationService } from 'app/services/authentication.service';
 })
 export class AuthenticationsComponent implements OnInit {
 
+  masterSelected: any;
+  checklist: any;
+  public myClass: boolean = false;
+
   constructor(
     private authenticationService: AuthenticationService,
     private route: Router
@@ -29,4 +33,14 @@ export class AuthenticationsComponent implements OnInit {
       });
   };
 
+  mostrarPass(){
+    //mostrar contraseña
+      let password :any = document.getElementById('pass');
+      if (password.type === "password") {
+        password.type = "text";
+      } else {
+        password.type = "password";
+      } // mostrar ojo
+      return this.myClass = !this.myClass;
+    }
 }
