@@ -23,6 +23,8 @@ export class ScanComponent implements OnInit , AfterViewInit{
     fecha: ''
   };
 
+  dataCamaras: MediaDeviceInfo[] = [];
+
   stopAfterScan: boolean = false;
 
   constructor(
@@ -65,12 +67,14 @@ export class ScanComponent implements OnInit , AfterViewInit{
     navigator.mediaDevices.enumerateDevices().then( dev => {
       console.log(dev)
 
+      
       const videoDevices: MediaDeviceInfo[] = [];
       for (const device of dev) {
         if (device.kind.toString() === 'videoinput') {
           videoDevices.push(device);
         }
       }
+      this.dataCamaras = videoDevices;
       if (videoDevices.length > 0) {
         let choosenDev;
         for (const dev of videoDevices) {
