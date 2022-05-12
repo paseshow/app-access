@@ -23,7 +23,7 @@ export class ScanComponent implements OnInit , AfterViewInit{
     fecha: ''
   };
 
-  dataCamaras: any[] = [];
+  dataCamaras: string = '';
 
   stopAfterScan: boolean = false;
 
@@ -65,9 +65,6 @@ export class ScanComponent implements OnInit , AfterViewInit{
 
   ngAfterViewInit(): void {
     navigator.mediaDevices.enumerateDevices().then( dev => {
-      console.log(dev)
-
-      this.dataCamaras = dev;
       
       const videoDevices: MediaDeviceInfo[] = [];
       for (const device of dev) {
@@ -91,8 +88,6 @@ export class ScanComponent implements OnInit , AfterViewInit{
       }
     });
 
-    
-
     this.onCodeResult();
   }
 
@@ -115,7 +110,7 @@ export class ScanComponent implements OnInit , AfterViewInit{
             usuario: responseExit[0].reserva_id.cliente_id.nombre
           }
         }, error => {
-
+          this.qrCode = "ERROR ---".concat(result);
       });
       this.stopAfterScan = false;
     });
