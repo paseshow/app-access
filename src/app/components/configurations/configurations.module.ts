@@ -5,7 +5,7 @@ import { DashboarComponent } from "../dashboar/dashboar.component";
 import { ConfigurationsComponent } from "./configurations.component";
 import { Route } from "./configurations.routing";
 import { ScanComponent } from "./scan/scan.component";
-import { NgQrScannerModule } from "angular2-qrscanner";
+ import { NgQrScannerModule } from "angular2-qrscanner";
 
 
 @NgModule({

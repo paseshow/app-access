@@ -4,23 +4,26 @@
       <div class="card-body">
         <div class="img-paseshow"></div>
         <br />
-        <form>
+        <form
+          [formGroup]="formLogin"
+          (change)="mostrarUserId($event)"
+          (submit)="iniciarSesion()"
+        >
           <!-- MAIL -->
           <div class="form-group">
             <input
-              type="email"
+              type="number"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
+              id="username"
+              formControlName="username"
               placeholder="Usuario"
             />
           </div>
-        </form>
-
-        <!-- PASSWORD -->
+          <!-- PASSWORD -->
           <div class="form-password">
             <input
               type="password"
+              formControlName="password"
               class="form-control"
               placeholder="Contraseña"
               id="pass"
@@ -28,16 +31,29 @@
 
             <!-- OJO PASSWORD -->
             <div class="viewPassword">
-              <button i class="fa" [ngClass]="myClass ?'fa-eye': 'fa-eye-slash'" style="background-color: transparent; border: 1px solid #ffffff;" 
-              (click)="mostrarPass()" aria-hidden="true"></button>
+              <button
+                i
+                class="fa"
+                [ngClass]="myEye ? 'fa-eye' : 'fa-eye-slash'"
+                style="background-color: transparent; border: 1px solid #ffffff"
+                (click)="mostrarPass()"
+                aria-hidden="true"
+              ></button>
+            </div>
+
+            <!-- MENSAJE ERROR LOGIN -->
+            <div class="mensjaLoginError">
+              {{ mensajeLoginError }}
             </div>
 
             <!-- BOTON INICIAR SESION -->
+            <br />
+            <button [disabled]="formLogin.invalid" class="btn">
+              Iniciar Sesion
+            </button>
           </div>
-          <br />
-        <button onclick="" type="button" class="btn">Iniciar Sesion</button>
+        </form>
       </div>
     </div>
   </div>
 </body>
-

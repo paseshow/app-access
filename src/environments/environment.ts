@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://34.212.188.22'
+  url: 'https://access-control.paseshow.com.ar/authentication'
 };
 
 /*

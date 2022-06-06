@@ -17,12 +17,19 @@
 .img-paseshow{
     width: 210px;
     height: 70px;
-    margin-left: 50px;
+    margin-left: 55px;
     border-radius: 5px;
     background-color: black;
     background-image: url(https://www.paseshow.com.ar/images/inicio/logov3.png);
     background-size: cover;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
 
 .form-password {
     position: relative;
@@ -49,6 +56,12 @@
 .classFalse {
     background-color: red;
     color: #fff;
+}
+.mensjaLoginError {
+    font-size: 14px;
+    color: rgb(187, 0, 0);
+    text-align: center;
+    padding-top: 5px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -79,5 +92,12 @@
 
     .img-paseshow {
         margin-left: 25px;
+    }
+
+    .alert {
+        width: 282px;
+        height: 28px;
+        padding-top: 0px;
+        margin-left: 35px;
     }
 }
