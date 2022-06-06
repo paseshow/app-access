@@ -8,7 +8,7 @@ const routes: Routes = [
     component: AuthenticationsComponent
   },
   {
-    path: 'configurations',
+    path: 'configurations', 
     loadChildren: () => import('./components/configurations/configurations.module').then(m => m.ConfigurationsModule)
   }
 ];

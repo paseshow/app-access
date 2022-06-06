@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboar.component.css']
 })
 export class DashboarComponent implements OnInit {
+  route: any;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  irConfig() {
+    this.route.navigate(['configurations']);
   }
 
 }

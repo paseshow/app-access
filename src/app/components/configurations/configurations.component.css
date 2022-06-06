@@ -29,6 +29,7 @@ h1 {
 .form-select {
     margin-left: 28%;
     max-width: 300px;
+    margin-top: 4px;
 }
 
 .checkear {
