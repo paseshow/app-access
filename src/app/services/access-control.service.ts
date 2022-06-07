@@ -15,6 +15,6 @@ export class AccessControlService {
     }
 
     accessByQrCode(qrCode: string) {
-        return this.http.get(this.urlBase.concat("/access/qrcode/").concat(qrCode)).pipe(take(1));
+        return this.http.get(this.urlBase.concat("access/qrcode/").concat(qrCode)).pipe(take(1));
     };
 }

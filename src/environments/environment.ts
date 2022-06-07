@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://access-control.paseshow.com.ar/authentication'
+  // url: 'https://access-control.paseshow.com.ar/'
+  url: 'http://localhost:8080/'
 };
 
 /*

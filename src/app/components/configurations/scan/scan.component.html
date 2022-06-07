@@ -1,18 +1,22 @@
 <app-dashboar></app-dashboar>
-<div class="container-padre">
-  <div class="contenido"></div>
-    <!-- SCANER QR -->
-    <qr-scanner
-      #QrScannerComponent
-        [debug]="true"
-        [canvasWidth]="1080" 
-        [canvasHeight]="1080" 
-        [stopAfterScan]="stopAfterScan" 
-        [updateTime]="500">
-    </qr-scanner>
+<div class="scan">
+  <div class="scan__cuadro"></div>
+
+  <div class="scan__process" *ngIf="stopAfterScan">
+    <p> Espere. . .</p>
+  </div>
+
+  <!-- SCANER QR -->
+  <qr-scanner #QrScannerComponent
+    [debug]="true"
+    [canvasWidth]="1080"
+    [canvasHeight]="1080"
+    [stopAfterScan]="stopAfterScan"
+    [updateTime]="500">
+  </qr-scanner>
 </div>
 
-  <!-- INFORMACION DEL QR -->
+<!-- INFORMACION DEL QR -->
 
 <div class="informacion">
   <ul>
@@ -21,10 +25,9 @@
     <li>Descuento: {{data?.descuento}}</li>
     <li>Usuario: {{data?.usuario}}</li>
     <li>Funcion: {{data?.funcion}}</li>
-    <li>Fecha y Hora: {{data?.fecha}}</li>
   </ul>
 </div>
 
-<div class="container-qr">
-  <h5>{{qrCode}}</h5>
+<div *ngIf="viewMensaje">
+  <p>{{ mensaje }}</p>
 </div>

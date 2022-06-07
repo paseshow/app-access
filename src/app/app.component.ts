@@ -2,16 +2,14 @@ import { HttpClient } from '@angular/common/http';
 // import { Token } from '@angular/compiler';
 import { Token } from 'app/models/token.model';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Route, Router } from '@angular/router';
-import { environment } from 'environments/environment';
-import { response } from 'express';
-import { url } from 'inspector';
 import { DatosUsuarios } from './models/datosusuarios.interface';
 import { AuthenticationService } from './services/authentication.service';
 import { EventosService } from './services/eventos.service';
 import { TokenService } from './services/token.service';
 import { error } from '@angular/compiler/src/util';
+import { UserEventService } from './services/user-event.service';
 
 @Component({
   selector: 'app-root',
@@ -19,32 +17,47 @@ import { error } from '@angular/compiler/src/util';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'acceso';
-  public formLogin: FormGroup;
-  AuthenticationService: any;
-  EventosService: any;
-  TokenService: any;  
-  mostrarDatosUser: DatosUsuarios;
-  route: any;
+  title = 'Paseshow';
 
   constructor(
     private tokenService: TokenService,
+    private authenticationService: AuthenticationService,
     private router: Router,
-    private authentication: AuthenticationService,
-    private api: AuthenticationService,
-    private eventoservice: EventosService,
-    private token: TokenService
-  ) {}
+    private userEventService: UserEventService
+  ) { }
 
   ngOnInit(): void {
+    this.pedirToken();
   }
-  
 
-  pedirToken(): void{
-     this.tokenService.getToken()
-     this.api.getDatoUser().subscribe((responseExit: DatosUsuarios) => {
-      // pedimos el ID en el localsotrage
-      localStorage.setItem('UserID', responseExit.id);
-    });   
-}
+
+  pedirToken(): void {
+    let token = this.tokenService.getToken();
+
+    if (token) {
+      this.authenticationService.getDatoUser().subscribe((responseExit: DatosUsuarios) => {
+        localStorage.setItem('UserID', responseExit.id);
+
+        this.getConfigurationsUser(+responseExit.id);
+      });
+    } else {
+      this.router.navigate(['authentications'])
+    }
+  };
+
+  getConfigurationsUser(userId: number) {
+    this.userEventService.getConfigurationsByUser(userId).subscribe(
+      (response: any) => {
+        if(!!response) {
+          localStorage.setItem('configurations', JSON.stringify(response));
+          this.userEventService.configurations.next(response);
+          this.router.navigate(['configurations', 'scan']);
+        }
+      }, error => {
+
+      });
+
+  };
+
+
 }

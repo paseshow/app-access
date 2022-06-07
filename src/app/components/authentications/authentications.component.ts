@@ -7,6 +7,7 @@ import { Route, Router } from '@angular/router';
 import { DatosUsuarios } from 'app/models/datosusuarios.interface';
 import { __values } from 'tslib';
 import { error } from '@angular/compiler/src/util';
+import { UserEventService } from 'app/services/user-event.service';
 // import { variationPlacements } from '@popperjs/core';
 
 @Component({
@@ -25,8 +26,9 @@ export class AuthenticationsComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private api: AuthenticationService,
-    private route: Router,
-    private datosUsuarios: AuthenticationService
+    private router: Router,
+    private datosUsuarios: AuthenticationService,
+    private userEventService: UserEventService
   ) {}
 
   ngOnInit(): void {
@@ -41,13 +43,10 @@ export class AuthenticationsComponent implements OnInit {
       (responseExit: Token) => {
         // almacenar en el LOCALSTORAGE
         localStorage.setItem('token', responseExit.token);
-        this.route.navigate(['configurations']);
+        this.router.navigate(['configurations']);
 
-        // almacenar en el LOCALSTORAGE
-          this.api.getDatoUser().subscribe((responseExit: DatosUsuarios) => {
-            // pedimos el ID en el localsotrage
-            localStorage.setItem('UserID', responseExit.id);
-          });
+        this.logged();
+        
       },
       (error) => {
         return (this.mensajeLoginError = '¡DNI o CONTRASEÑA INCORRECTA!');
@@ -58,22 +57,42 @@ export class AuthenticationsComponent implements OnInit {
   //mostrar contraseña
   mostrarPass(): boolean {
     let password: any = document.getElementById('pass');
-    if (password.type === 'password') {
-      password.type = 'text';
-    } else {
-      password.type = 'password';
-    }
+    
+    password.type = password.type === 'password' ? 'text' : 'password';
 
     // mostrar ojo
-    return (this.myEye = !this.myEye);
+    return this.myEye = !this.myEye;
   }
 
   iniciarSesion(): any {
-    console.log(this.formLogin.value);
     this.authentications(event?.target);
   }
 
   mostrarUserId(event: any) {
     this.authentications;
-  }
+  };
+
+
+  logged() {
+    this.api.getDatoUser().subscribe((responseExit: DatosUsuarios) => {
+      // pedimos el ID en el localsotrage
+      localStorage.setItem('UserID', responseExit.id);
+      this.getConfigurationsUser(+responseExit.id);
+
+    });
+  };
+
+  getConfigurationsUser(userId: number) {
+    this.userEventService.getConfigurationsByUser(userId).subscribe(
+      (response: any) => {
+        if(!!response) {
+          localStorage.setItem('configurations', response.toString());
+          this.userEventService.configurations.next(response);
+          this.router.navigate(['configurations', 'scan']);
+        }
+      }, error => {
+
+      });
+
+  };
 }
