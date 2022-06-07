@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://accesscontrol.paseshow.com.ar'
+  url: 'https://access-control.paseshow.com.ar/'
 };
