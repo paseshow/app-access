@@ -5,10 +5,10 @@
     &__cuadro {
         position: absolute;
         top: 10px;
-        margin-top: 10%;
+        margin-top: 5%;
         width: 200px;
         height: 200px;
-        margin-left: 30%;
+        margin-left: 25%;
         border: 3px solid rgb(0, 255, 0);
     }
 
@@ -27,16 +27,34 @@
 
 
 .informacion {
-    font-size: 20px;
+    font-size: 16px;
+    a {
+        cursor: none !important;
+        font-weight: bold;
+    }
 }
 
-/* .container-qr {
- background-color: rgba(18, 20, 20, 0.541);
- width: 360px;
- height: 50px;
-} */
-
+.ingresODenegado{
+    height: 80px; 
+    font-family: 'Josefin Sans', sans-serif; 
+    font-size: 1.4rem;
+    p {
+        margin-left: 10px;
+        }
+}
 h5 {
     font-size: 19px;
     color: rgb(255, 255, 255);
+}
+
+.imagenesCorrectoyDenegada {
+    width: 110px;
+    height: 90px;
+    background-size: cover;
+    margin-left: 250px;
+    border-radius: 80px;
+    padding-left: 33px;
+    padding-top: 20px;
+    position: relative;
+    bottom: 63px;
 }

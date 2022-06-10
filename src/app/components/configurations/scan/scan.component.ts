@@ -23,9 +23,11 @@ export class ScanComponent implements OnInit, AfterViewInit {
     usuario: '',
     funcion: ''
   };
+  
 
-  dataCamaras: string = '';
-  mensaje: string = ' Erro con el servidor....';
+  ingresoCorrecto: boolean = false;
+  ingresoDenegado: boolean = false;
+  mensaje: string = ' Error con el servidor....';
   viewMensaje: boolean = false;
 
   stopAfterScan: boolean = false;
@@ -81,6 +83,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
 
     this.qrScannerComponent.capturedQr.subscribe(result => {
       this.stopAfterScan = true;
+      this.ingresoCorrecto = false;
 
       this.accessControlService.accessByQrCode(result)
         .pipe(finalize(() => {
@@ -95,11 +98,13 @@ export class ScanComponent implements OnInit, AfterViewInit {
 
                 if (unaConfigirations.id_evento != responseExit[0].sector_evento_id.evento_id.id) {
                   this.mensaje = 'EVENTO INCORRECTO';
+                  this.ingresoDenegado = true;
                 } else {
                   unaConfigirations.sectores_eventos_configurations_user.forEach((unSectorEvento: any) => {
                     unSectorEvento.sectores.forEach((unSector: any) => {
                       if (unSector.id_sector != responseExit[0].sector_evento_id.sector_id.id) {
                         this.mensaje = 'SECTOR INCORRECTO';
+                        this.ingresoDenegado = true;
                       } else {
                         throw 'Break';
                       }
@@ -110,6 +115,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
             } catch (e) {
               if (e == 'Break')
                 this.mensaje = 'OK';
+                this.ingresoCorrecto = true;
             }
 
 
@@ -118,12 +124,13 @@ export class ScanComponent implements OnInit, AfterViewInit {
               evento: responseExit[0].sector_evento_id.evento_id.nombre,
               funcion: responseExit[0].sector_evento_id.descripcion,
               ubicacionId: responseExit[0].id,
-              usuario: responseExit[0].reserva_id.cliente_id.nombre
+              usuario: responseExit[0].reserva_id.cliente_id.nombre,
             }
           }, error => {
 
             if (error.status == 400) {
               this.mensaje = 'YA INGRESO';
+              this.ingresoDenegado = true;
               this.data = {
                 descuento: error.error[0].descuento_sector_id.descripcion,
                 evento: error.error[0].sector_evento_id.evento_id.nombre,

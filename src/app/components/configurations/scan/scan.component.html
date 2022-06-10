@@ -7,12 +7,8 @@
   </div>
 
   <!-- SCANER QR -->
-  <qr-scanner #QrScannerComponent
-    [debug]="true"
-    [canvasWidth]="1080"
-    [canvasHeight]="1080"
-    [stopAfterScan]="stopAfterScan"
-    [updateTime]="500">
+  <qr-scanner #QrScannerComponent [debug]="false" [canvasWidth]="1080" [canvasHeight]="1080" [stopAfterScan]="false"
+    [updateTime]="4000">
   </qr-scanner>
 </div>
 
@@ -20,14 +16,22 @@
 
 <div class="informacion">
   <ul>
-    <li>Ubicación: {{data?.ubicacionId}}</li>
-    <li>Evento: {{data?.evento}}</li>
-    <li>Descuento: {{data?.descuento}}</li>
-    <li>Usuario: {{data?.usuario}}</li>
-    <li>Funcion: {{data?.funcion}}</li>
+    <li>Ubicación: <a>{{data?.ubicacionId}}</a>
+    </li>
+    <li>Eventos: <a>{{data?.evento}}</a></li>
+    <li>Descuento: <a>{{data?.descuento}}</a>
+    </li>
+    <li>Usuario: <a>{{data?.usuario}}</a>
+    </li>
+    <li>Funcion: <a>{{data?.funcion}}</a>
+    </li>
   </ul>
 </div>
 
-<div *ngIf="viewMensaje">
+<div class="ingresODenegado" *ngIf="viewMensaje">
   <p>{{ mensaje }}</p>
+  <div class="imagenesCorrectoyDenegada">
+    <img *ngIf="ingresoCorrecto" src="../../../../assets/img/correcto.png" alt="Correcto">
+    <img *ngIf="ingresoDenegado" src="../../../../assets/img/error.png" alt="Denegado">
+  </div>
 </div>

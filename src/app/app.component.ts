@@ -1,14 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-// import { Token } from '@angular/compiler';
-import { Token } from 'app/models/token.model';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { DatosUsuarios } from './models/datosusuarios.interface';
 import { AuthenticationService } from './services/authentication.service';
-import { EventosService } from './services/eventos.service';
 import { TokenService } from './services/token.service';
-import { error } from '@angular/compiler/src/util';
 import { UserEventService } from './services/user-event.service';
 
 @Component({

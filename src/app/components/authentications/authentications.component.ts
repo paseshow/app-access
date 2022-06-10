@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'app/services/authentication.service';
-import { Login } from 'app/models/login.interface';
 import { Token } from 'app/models/token.model';
 import { Route, Router } from '@angular/router';
 import { DatosUsuarios } from 'app/models/datosusuarios.interface';
 import { __values } from 'tslib';
-import { error } from '@angular/compiler/src/util';
 import { UserEventService } from 'app/services/user-event.service';
-// import { variationPlacements } from '@popperjs/core';
+
 
 @Component({
   selector: 'app-authentications',
@@ -69,7 +67,7 @@ export class AuthenticationsComponent implements OnInit {
   }
 
   mostrarUserId(event: any) {
-    this.authentications;
+    this.authentications(event);
   };
 
 
