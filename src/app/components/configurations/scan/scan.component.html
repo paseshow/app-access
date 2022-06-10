@@ -1,37 +1,46 @@
 <app-dashboar></app-dashboar>
-<div class="scan">
-  <div class="scan__cuadro"></div>
+<div class="container">
+  <div class="scan">
+    <div class="scan__cuadro"></div>
 
-  <div class="scan__process" *ngIf="stopAfterScan">
-    <p> Espere. . .</p>
+    <div class="scan__process" *ngIf="stopAfterScan">
+      <p> Espere. . .</p>
+    </div>
+
+    <!-- SCANER QR -->
+    <qr-scanner #QrScannerComponent [debug]="false" [canvasWidth]="1080" [canvasHeight]="1080" [stopAfterScan]="false"
+                [updateTime]="4000">
+    </qr-scanner>
+
+    <div class="scan__imageAccess">
+      <img class="scan__imageAccess__ok" *ngIf="ingresoCorrecto" src="../../../../assets/img/correcto.png" alt="Correcto">
+      <img class="scan__imageAccess__faild" *ngIf="ingresoDenegado" src="../../../../assets/img/error.png" alt="Denegado">
+    </div>
   </div>
 
-  <!-- SCANER QR -->
-  <qr-scanner #QrScannerComponent [debug]="false" [canvasWidth]="1080" [canvasHeight]="1080" [stopAfterScan]="false"
-    [updateTime]="4000">
-  </qr-scanner>
-</div>
+  <!-- INFORMACION DEL QR -->
+  <div class="informacion">
+    <ul>
+      <li>
+        Ubicación: <a>{{data?.ubicacionId}}</a>
+      </li>
+      <li>
+        Eventos: <a>{{data?.evento}}</a>
+      </li>
+      <li>
+        Descuento: <a>{{data?.descuento}}</a>
+      </li>
+      <li>
+        Usuario: <a>{{data?.usuario}}</a>
+      </li>
+      <li>
+        Funcion: <a>{{data?.funcion}}</a>
+      </li>
+    </ul>
+  </div>
 
-<!-- INFORMACION DEL QR -->
-
-<div class="informacion">
-  <ul>
-    <li>Ubicación: <a>{{data?.ubicacionId}}</a>
-    </li>
-    <li>Eventos: <a>{{data?.evento}}</a></li>
-    <li>Descuento: <a>{{data?.descuento}}</a>
-    </li>
-    <li>Usuario: <a>{{data?.usuario}}</a>
-    </li>
-    <li>Funcion: <a>{{data?.funcion}}</a>
-    </li>
-  </ul>
-</div>
-
-<div class="ingresODenegado" *ngIf="viewMensaje">
-  <p>{{ mensaje }}</p>
-  <div class="imagenesCorrectoyDenegada">
-    <img *ngIf="ingresoCorrecto" src="../../../../assets/img/correcto.png" alt="Correcto">
-    <img *ngIf="ingresoDenegado" src="../../../../assets/img/error.png" alt="Denegado">
+  <div class="ingresODenegado" *ngIf="true">
+    <p>{{ mensaje }}</p>
   </div>
 </div>
+

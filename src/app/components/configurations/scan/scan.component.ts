@@ -23,7 +23,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
     usuario: '',
     funcion: ''
   };
-  
+
 
   ingresoCorrecto: boolean = false;
   ingresoDenegado: boolean = false;
@@ -84,6 +84,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
     this.qrScannerComponent.capturedQr.subscribe(result => {
       this.stopAfterScan = true;
       this.ingresoCorrecto = false;
+      this.ingresoDenegado = false;
 
       this.accessControlService.accessByQrCode(result)
         .pipe(finalize(() => {
@@ -118,7 +119,6 @@ export class ScanComponent implements OnInit, AfterViewInit {
                 this.ingresoCorrecto = true;
             }
 
-
             this.data = {
               descuento: responseExit[0].descuento_sector_id.descripcion,
               evento: responseExit[0].sector_evento_id.evento_id.nombre,
@@ -129,7 +129,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
           }, error => {
 
             if (error.status == 400) {
-              this.mensaje = 'YA INGRESO';
+              this.mensaje = 'YA INGRESO' + error.error[0].fecha_ingreso;
               this.ingresoDenegado = true;
               this.data = {
                 descuento: error.error[0].descuento_sector_id.descripcion,
@@ -139,6 +139,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
                 usuario: error.error[0].reserva_id.cliente_id.nombre
               }
             } else {
+              this.ingresoDenegado = true;
               this.mensaje = 'ERROR EN EL SERVIDOR';
             }
           });

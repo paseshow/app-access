@@ -1,43 +1,93 @@
-.scan {
-    position: relative;
-    max-width: 500px;
+.container {
+  background-color: black;
+  height: 100%;
 
-    &__cuadro {
-        position: absolute;
-        top: 10px;
-        margin-top: 5%;
-        width: 200px;
-        height: 200px;
-        margin-left: 25%;
-        border: 3px solid rgb(0, 255, 0);
-    }
+  .scan {
+      position: relative;
+      max-width: 500px;
 
-    &__process {
-        position: absolute;
-        bottom: 0;
-        
-        p {
-            margin-left: 10px;
-            font-weight: 600;
-            font-size: 35px;
-            color: rgb(36, 151, 36);
+      &__cuadro {
+          position: absolute;
+          top: 10px;
+          margin-top: 5%;
+          width: 200px;
+          height: 200px;
+          margin-left: 25%;
+          border: 3px solid rgb(0, 255, 0);
+      }
+
+      &__process {
+          position: absolute;
+          bottom: 0;
+
+          p {
+              margin-left: 10px;
+              font-weight: 600;
+              font-size: 35px;
+              color: rgb(36, 151, 36);
+          }
+      }
+
+      &__imageAccess {
+
+        &__ok {
+          position: absolute;
+          bottom: 11px;
+          right: 12px;
+          height: 60px;
+          width: 60px;
+          background-color: white;
+          padding: 4px;
+          border-radius: 28px;
         }
-    }
-}
 
+        &__faild {
+          position: absolute;
+          bottom: 11px;
+          right: 12px;
+          height: 60px;
+          width: 60px;
+          background-color: white;
+          padding: 4px;
+          border-radius: 28px;
+        }
+      }
+  }
 
-.informacion {
+  .informacion {
     font-size: 16px;
-    a {
-        cursor: none !important;
-        font-weight: bold;
+    margin: 15px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: white;
+
+    ul {
+      margin: 0;
+      padding: 10px;
+      border: 2px solid black;
+      border-style: solid dashed;
+      border-radius: 10px;
+
+      li::marker {
+        color: white;
+      }
     }
+
+    a {
+      cursor: none !important;
+      font-weight: bold;
+    }
+  }
+
 }
+
+
 
 .ingresODenegado{
-    height: 80px; 
-    font-family: 'Josefin Sans', sans-serif; 
+    height: 80px;
+    font-family: 'Josefin Sans', sans-serif;
     font-size: 1.4rem;
+    color: white;
     p {
         margin-left: 10px;
         }
