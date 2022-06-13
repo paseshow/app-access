@@ -2,3 +2,7 @@
 video {
     max-height: 410px !important;
 }
+
+canvas {
+  display: none !important;
+}

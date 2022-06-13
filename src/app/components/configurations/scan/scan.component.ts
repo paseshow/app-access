@@ -39,6 +39,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
     offline: false
   };
 
+  camare: any;
 
   constructor(
     private accessControlService: AccessControlService,
@@ -70,8 +71,10 @@ export class ScanComponent implements OnInit, AfterViewInit {
           }
         }
         if (choosenDev) {
+          this.camare = choosenDev;
           this.qrScannerComponent.chooseCamera.next(choosenDev);
         } else {
+          this.camare = videoDevices[0];
           this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
         }
       }
@@ -84,6 +87,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
   onCodeResult() {
 
     this.qrScannerComponent.capturedQr.subscribe(result => {
+      this.qrScannerComponent.stopScanning();
       this.stopAfterScan = true;
       this.ingresoCorrecto = false;
       this.ingresoDenegado = false;
@@ -92,6 +96,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
         .pipe(finalize(() => {
           this.viewMensaje = true;
           this.stopAfterScan = false;
+          this.qrScannerComponent.startScanning(this.camare);
         }))
         .subscribe(
           (responseExit: any) => {
