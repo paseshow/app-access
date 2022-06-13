@@ -1,7 +1,9 @@
+import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { QrScannerComponent } from 'angular2-qrscanner';
 import { AccessControlService } from 'app/services/access-control.service';
 import { UserEventService } from 'app/services/user-event.service';
+import { homedir } from 'os';
 import { finalize } from 'rxjs';
 
 
@@ -24,10 +26,10 @@ export class ScanComponent implements OnInit, AfterViewInit {
     funcion: ''
   };
 
-
   ingresoCorrecto: boolean = false;
   ingresoDenegado: boolean = false;
   mensaje: string = ' Error con el servidor....';
+  mensajeHoraIngreso: string = ' Error con el servidor....';
   viewMensaje: boolean = false;
 
   stopAfterScan: boolean = false;
@@ -116,7 +118,7 @@ export class ScanComponent implements OnInit, AfterViewInit {
             } catch (e) {
               if (e == 'Break')
                 this.mensaje = 'OK';
-                this.ingresoCorrecto = true;
+              this.ingresoCorrecto = true;
             }
 
             this.data = {
@@ -129,7 +131,9 @@ export class ScanComponent implements OnInit, AfterViewInit {
           }, error => {
 
             if (error.status == 400) {
-              this.mensaje = 'YA INGRESO' + error.error[0].fecha_ingreso;
+              this.mensaje = 'YA INGRESO - EL DIA:';
+              this.mensajeHoraIngreso = 'FECHA: ' + error.error[0].fecha_ingreso.substring(0, 11).replace('T', ' ') 
+              + ' ' + 'HORA:' + error.error[0].fecha_ingreso.substring(10, 16).replace('T', ' ') + 'HS';
               this.ingresoDenegado = true;
               this.data = {
                 descuento: error.error[0].descuento_sector_id.descripcion,
@@ -144,9 +148,6 @@ export class ScanComponent implements OnInit, AfterViewInit {
             }
           });
     });
-
-
-
   }
 
   onScanError(result: any) {
