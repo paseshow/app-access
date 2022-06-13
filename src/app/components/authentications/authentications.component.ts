@@ -41,7 +41,6 @@ export class AuthenticationsComponent implements OnInit {
       (responseExit: Token) => {
         // almacenar en el LOCALSTORAGE
         localStorage.setItem('token', responseExit.token);
-        this.router.navigate(['configurations']);
 
         this.logged();
         
