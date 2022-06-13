@@ -42,6 +42,7 @@ export class AuthenticationsComponent implements OnInit {
         // almacenar en el LOCALSTORAGE
         localStorage.setItem('token', responseExit.token);
 
+
         this.logged();
         
       },

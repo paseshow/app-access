@@ -136,9 +136,9 @@ export class ScanComponent implements OnInit, AfterViewInit {
           }, error => {
 
             if (error.status == 400) {
-              this.mensaje = 'YA INGRESO - EL DIA:';
+              this.mensaje = 'YA INGRESO';
               this.mensajeHoraIngreso = 'FECHA: ' + error.error[0].fecha_ingreso.substring(0, 11).replace('T', ' ') 
-              + ' ' + 'HORA:' + error.error[0].fecha_ingreso.substring(10, 16).replace('T', ' ') + 'HS';
+              + '- ' + 'HORA:' + error.error[0].fecha_ingreso.substring(10, 16).replace('T', ' ') + 'hs';
               this.ingresoDenegado = true;
               this.data = {
                 descuento: error.error[0].descuento_sector_id.descripcion,
