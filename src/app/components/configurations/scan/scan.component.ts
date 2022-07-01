@@ -1,9 +1,7 @@
-import { computeDecimalDigest } from '@angular/compiler/src/i18n/digest';
 import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { QrScannerComponent } from 'angular2-qrscanner';
 import { AccessControlService } from 'app/services/access-control.service';
 import { UserEventService } from 'app/services/user-event.service';
-import { homedir } from 'os';
 import { finalize } from 'rxjs';
 
 
@@ -39,7 +37,11 @@ export class ScanComponent implements OnInit, AfterViewInit {
     offline: false
   };
 
+
+  qrYaIgresados: string[] = [];
+  qrVacio = [''];
   camare: any;
+  offline: boolean;
 
   constructor(
     private accessControlService: AccessControlService,
@@ -49,9 +51,13 @@ export class ScanComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.userEventService.configurations.subscribe((configurations: any) => {
+      
       this.configurationsUser = configurations[configurations.length - 1];
+       this.configurationsUser.offline = true;
     });
   }
+
+
 
   ngAfterViewInit(): void {
     navigator.mediaDevices.enumerateDevices().then(dev => {
@@ -91,68 +97,90 @@ export class ScanComponent implements OnInit, AfterViewInit {
       this.stopAfterScan = true;
       this.ingresoCorrecto = false;
       this.ingresoDenegado = false;
+      //CONDICION PARA USO DE SCAN EN OFFLINE
+      if (this.configurationsUser.offline) {
 
-      this.accessControlService.accessByQrCode(result)
-        .pipe(finalize(() => {
-          this.viewMensaje = true;
-          this.stopAfterScan = false;
+        let indexResult = this.qrYaIgresados.indexOf(result);
+        if (indexResult != -1) {
+          //RECHAZAR INGRESO.
+          this.ingresoDenegado = true;
+          this.mensaje = 'YA INGRESO';
+          this.stopAfterScan = true;
           this.qrScannerComponent.startScanning(this.camare);
-        }))
-        .subscribe(
-          (responseExit: any) => {
+        } else {
+          //TODAVIA NO INGRESO.
+          this.qrYaIgresados.push(result);
+          this.mensaje = 'OK';
+          this.ingresoCorrecto = true;
+          this.viewMensaje = true;
+          this.stopAfterScan = true;
+          this.qrScannerComponent.startScanning(this.camare);
+        }
 
-            try {
-              this.configurationsUser.configurations.forEach((unaConfigirations: any) => {
+      } else {
+        this.accessControlService.accessByQrCode(result)
+          .pipe(finalize(() => {
+            this.viewMensaje = true;
+            this.stopAfterScan = true;
+            this.qrScannerComponent.startScanning(this.camare);
+          }))
+          .subscribe(
+            (responseExit: any) => {
 
-                if (unaConfigirations.id_evento != responseExit[0].sector_evento_id.evento_id.id) {
-                  this.mensaje = 'EVENTO INCORRECTO';
-                  this.ingresoDenegado = true;
-                } else {
-                  unaConfigirations.sectores_eventos_configurations_user.forEach((unSectorEvento: any) => {
-                    unSectorEvento.sectores.forEach((unSector: any) => {
-                      if (unSector.id_sector != responseExit[0].sector_evento_id.sector_id.id) {
-                        this.mensaje = 'SECTOR INCORRECTO';
-                        this.ingresoDenegado = true;
-                      } else {
-                        throw 'Break';
-                      }
+              try {
+                this.configurationsUser.configurations.forEach((unaConfigirations: any) => {
+
+                  if (unaConfigirations.id_evento != responseExit[0].sector_evento_id.evento_id.id) {
+                    this.mensaje = 'EVENTO INCORRECTO';
+                    this.ingresoDenegado = true;
+                  } else {
+                    unaConfigirations.sectores_eventos_configurations_user.forEach((unSectorEvento: any) => {
+                      unSectorEvento.sectores.forEach((unSector: any) => {
+                        if (unSector.id_sector != responseExit[0].sector_evento_id.sector_id.id) {
+                          this.mensaje = 'SECTOR INCORRECTO';
+                          this.ingresoDenegado = true;
+                        } else {
+                          throw 'Break';
+                        }
+                      });
                     });
-                  });
-                }
-              });
-            } catch (e) {
-              if (e == 'Break')
-                this.mensaje = 'OK';
-              this.ingresoCorrecto = true;
-            }
-
-            this.data = {
-              descuento: responseExit[0].descuento_sector_id.descripcion,
-              evento: responseExit[0].sector_evento_id.evento_id.nombre,
-              funcion: responseExit[0].sector_evento_id.descripcion,
-              ubicacionId: responseExit[0].id,
-              usuario: responseExit[0].reserva_id.cliente_id.nombre,
-            }
-          }, error => {
-
-            if (error.status == 400) {
-              this.mensaje = 'YA INGRESO';
-              this.mensajeHoraIngreso = 'FECHA: ' + error.error[0].fecha_ingreso.substring(0, 11).replace('T', ' ') 
-              + '- ' + 'HORA:' + error.error[0].fecha_ingreso.substring(10, 16).replace('T', ' ') + 'hs';
-              this.ingresoDenegado = true;
-              this.data = {
-                descuento: error.error[0].descuento_sector_id.descripcion,
-                evento: error.error[0].sector_evento_id.evento_id.nombre,
-                funcion: error.error[0].sector_evento_id.descripcion,
-                ubicacionId: error.error[0].id,
-                usuario: error.error[0].reserva_id.cliente_id.nombre
+                  }
+                });
+              } catch (e) {
+                if (e == 'Break')
+                  this.mensaje = 'OK';
+                this.ingresoCorrecto = true;
               }
-            } else {
-              this.ingresoDenegado = true;
-              this.mensaje = 'ERROR EN EL SERVIDOR';
-            }
-          });
-    });
+
+              this.data = {
+                descuento: responseExit[0].descuento_sector_id.descripcion,
+                evento: responseExit[0].sector_evento_id.evento_id.nombre,
+                funcion: responseExit[0].sector_evento_id.descripcion,
+                ubicacionId: responseExit[0].id,
+                usuario: responseExit[0].reserva_id.cliente_id.nombre,
+              }
+            }, error => {
+
+              if (error.status == 400) {
+                this.mensaje = 'YA INGRESO';
+                this.mensajeHoraIngreso = 'FECHA: ' + error.error[0].fecha_ingreso.substring(0, 11).replace('T', ' ')
+                  + '- ' + 'HORA:' + error.error[0].fecha_ingreso.substring(10, 16).replace('T', ' ') + 'hs';
+                this.ingresoDenegado = true;
+                this.data = {
+                  descuento: error.error[0].descuento_sector_id.descripcion,
+                  evento: error.error[0].sector_evento_id.evento_id.nombre,
+                  funcion: error.error[0].sector_evento_id.descripcion,
+                  ubicacionId: error.error[0].id,
+                  usuario: error.error[0].reserva_id.cliente_id.nombre
+                }
+              } else {
+                this.ingresoDenegado = true;
+                this.mensaje = 'ERROR EN EL SERVIDOR';
+              }
+            });
+      }
+    }
+    );
   }
 
   onScanError(result: any) {
@@ -168,3 +196,11 @@ export class ScanComponent implements OnInit, AfterViewInit {
   }
 
 }
+
+function indexOf(data: { ubicacionId: string; evento: string; descuento: string; usuario: string; funcion: string; }) {
+  throw new Error('Function not implemented.');
+}
+function accessByQrCode(accessByQrCode: any) {
+  throw new Error('Function not implemented.');
+}
+
